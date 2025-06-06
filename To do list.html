@@ -1,0 +1,62 @@
+def display_menu():
+    print("\n--- To-Do List Menu ---")
+    print("1. View To-Do List")
+    print("2. Add Task")
+    print("3. Update Task")
+    print("4. Delete Task")
+    print("5. Exit")
+
+def view_todo_list(todo_list):
+    if not todo_list:
+        print("\nYour to-do list is empty!")
+    else:
+        print("\nYour To-Do List:")
+        for i, task in enumerate(todo_list, 1):
+            print(f"{i}. {task}")
+
+def add_task(todo_list):
+    task = input("\nEnter the task to add: ")
+    todo_list.append(task)
+    print(f"Task '{task}' added to the to-do list.")
+
+def update_task(todo_list):
+    view_todo_list(todo_list)
+    if todo_list:
+        task_number = int(input("\nEnter the task number to update: "))
+        if 1 <= task_number <= len(todo_list):
+            updated_task = input("Enter the updated task: ")
+            todo_list[task_number - 1] = updated_task
+            print(f"Task {task_number} has been updated to '{updated_task}'.")
+        else:
+            print("Invalid task number.")
+
+def delete_task(todo_list):
+    view_todo_list(todo_list)
+    if todo_list:
+        task_number = int(input("\nEnter the task number to delete: "))
+        if 1 <= task_number <= len(todo_list):
+            removed_task = todo_list.pop(task_number - 1)
+            print(f"Task '{removed_task}' has been deleted.")
+        else:
+            print("Invalid task number.")
+
+def todo_list_app():
+    todo_list = []
+    while True:
+        display_menu()
+        choice = input("Choose an option (1-5): ")
+        if choice == '1':
+            view_todo_list(todo_list)
+        elif choice == '2':
+            add_task(todo_list)
+        elif choice == '3':
+            update_task(todo_list)
+        elif choice == '4':
+            delete_task(todo_list)
+        elif choice == '5':
+            print("Exiting the To-Do List application. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please select a valid option.")
+
+todo_list_app()
